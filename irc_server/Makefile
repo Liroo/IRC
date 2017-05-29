@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:36 2017 Pierre Monge
-## Last update Sat May 27 06:30:36 2017 Pierre Monge
+## Last update Mon May 29 23:23:53 2017 Pierre Monge
 ##
 
 
@@ -21,13 +21,17 @@ SRC_GENDIR := src/
 OBJ_GENDIR := $(OBJ_DIR)src/
 
 SRC_GEN = \
-	main.c
+	irc_server.c \
+	\
+	socket.c \
+	fd_list.c \
+	sig.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 
 # Utility
 
-INCDIRS := -I./src
+INCDIRS := -I./include
 
 CC = gcc
 
