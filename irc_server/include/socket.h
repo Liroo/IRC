@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 16:15:41 2017 Pierre Monge
-** Last update Mon May 29 14:20:47 2017 Pierre Monge
+** Last update Tue May 30 06:23:55 2017 Pierre Monge
 */
 
 #ifndef SOCKET_H
@@ -48,6 +48,6 @@ typedef struct		s_socket_info {
 int	socket_open(t_socket_info *socket_info, unsigned int port);
 char	*socket_get_ip(t_socket_info socket_info);
 int	socket_close(int fd);
-void	socket_loop();
+int	socket_loop();
 
 #endif /* !SOCKET_H */

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 16:15:46 2017 Pierre Monge
-** Last update Tue May 30 00:03:00 2017 Pierre Monge
+** Last update Tue May 30 08:22:44 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -19,6 +19,7 @@
 #include "struct.h"
 #include "socket.h"
 #include "fd_list.h"
+#include "event.h"
 
 int			socket_open(t_socket_info *socket_info,
 				    unsigned int port)
@@ -67,14 +68,25 @@ char		*socket_get_ip(t_socket_info socket_info)
   return (str);
 }
 
-void		socket_loop()
+int		socket_loop()
 {
   t_fdset	fd_event;
 
   while (!server.sig_handled)
     {
       fd_event = fd_select(60000);
-      if (fd_event.num == -1 || server.sig_handled)
+      if (server.sig_handled)
 	break;
+      if (fd_event.num == -1)
+	return (-1);
+      if (fd_event.num == 0)
+	continue;
+      if (FD_ISSET(server.me.sock.fd, &fd_event.read_fds))
+	if (fd_accept(server.me.sock.fd) == -1)
+	  return (-1);
+      if (event_dispatch(fd_event) == -1)
+	return (-1);
+      // TODO PING test based on time ?
     }
+  return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 14:38:58 2017 Pierre Monge
-** Last update Mon May 29 23:59:41 2017 Pierre Monge
+** Last update Tue May 30 06:31:57 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -93,5 +93,7 @@ int		fd_accept(int sock_fd)
   fd = accept(sock_fd, NULL, NULL);
   if (fd < 0)
     return (perror("accept"), -1);
+  // TODO get hostname using `getnameinfo`
+  // and gere buffer for client to answer DNS lookup
   return fd_add(fd);
 }

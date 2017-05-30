@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 27 06:33:50 2017 Pierre Monge
-** Last update Mon May 29 23:58:51 2017 Pierre Monge
+** Last update Tue May 30 06:26:40 2017 Pierre Monge
 */
 
 #include <stdio.h>
@@ -31,7 +31,8 @@ int		main(int argc, char *argv[])
   FD_SET(server.me.sock.fd, &server.secure_fdset.read_fds);
   server.highest_fd = server.me.sock.fd;
   sig_set();
-  socket_loop();
+  if (socket_loop() == -1)
+    return (socket_close(server.me.sock.fd), 84);
   if (socket_close(server.me.sock.fd) == -1)
     return (84);
   return (0);

@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:36 2017 Pierre Monge
-## Last update Mon May 29 23:23:53 2017 Pierre Monge
+## Last update Tue May 30 08:22:24 2017 Pierre Monge
 ##
 
 
@@ -25,7 +25,8 @@ SRC_GEN = \
 	\
 	socket.c \
 	fd_list.c \
-	sig.c
+	sig.c \
+	event.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 
