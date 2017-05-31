@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:30:07 2017 Pierre Monge
-** Last update Tue May 30 08:31:50 2017 Pierre Monge
+** Last update Wed May 31 06:12:45 2017 Pierre Monge
 */
 
 #include <sys/time.h>
@@ -29,7 +29,6 @@ static int	event_write(int fd)
 
 int		event_dispatch(t_fdset fd_event)
 {
-  // Todo reduce function to 25 lines or less
   int		fd;
   t_client	*client;
   EVENT		event_flags;
@@ -40,19 +39,13 @@ int		event_dispatch(t_fdset fd_event)
       event_flags = 0;
       client = &server.clients[fd];
       if (!client->sock.is_open)
-	{
-	  fd++;
-	  continue;
-	}
+	FOR_ITERATION(fd);
       if (FD_ISSET(fd, &fd_event.read_fds))
 	event_flags |= EVENT_READ;
       if (FD_ISSET(fd, &fd_event.write_fds))
 	event_flags |= EVENT_WRITE;
       if (!event_flags)
-	{
-	  fd++;
-	  continue;
-	}
+	FOR_ITERATION(fd);
       if (event_flags & EVENT_READ && event_read(fd) == -1)
 	return (-1);
       if (event_flags & EVENT_WRITE && event_write(fd) == -1)

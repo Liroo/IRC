@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:28:44 2017 Pierre Monge
-** Last update Tue May 30 08:24:12 2017 Pierre Monge
+** Last update Wed May 31 06:17:36 2017 Pierre Monge
 */
 
 #ifndef EVENT_H
@@ -16,6 +16,17 @@
 # define EVENT char
 # define EVENT_READ 0x1
 # define EVENT_WRITE 0x2
+
+/*
+** This macro is not lovely, I know
+** This is a fake for loop using iteration + continue
+** to re-invent the for/goto looping
+**
+** I did not like it but I have to.
+** The other way was to split the event_dispatch loop
+** in two function and the is horible to read...
+*/
+# define FOR_ITERATION(it) it++; continue;
 
 int	event_dispatch(t_fdset fd_event);
 
