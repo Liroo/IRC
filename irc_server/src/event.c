@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:30:07 2017 Pierre Monge
-** Last update Wed May 31 06:12:45 2017 Pierre Monge
+** Last update Thu Jun  1 04:24:00 2017 Pierre Monge
 */
 
 #include <sys/time.h>
@@ -30,15 +30,15 @@ static int	event_write(int fd)
 int		event_dispatch(t_fdset fd_event)
 {
   int		fd;
-  t_client	*client;
+  t_fd_entry	*fde;
   EVENT		event_flags;
 
   fd = 0;
-  while (fd < server.highest_fd && fd_event.num > 0)
+  while (fd < server.secure_fdset.highest_fd && fd_event.num > 0)
     {
       event_flags = 0;
-      client = &server.clients[fd];
-      if (!client->sock.is_open)
+      fde = &fd_entry[fd];
+      if (!fde->is_open)
 	FOR_ITERATION(fd);
       if (FD_ISSET(fd, &fd_event.read_fds))
 	event_flags |= EVENT_READ;

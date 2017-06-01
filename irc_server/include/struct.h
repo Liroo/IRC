@@ -5,17 +5,20 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Tue May 30 04:20:48 2017 Pierre Monge
+** Last update Thu Jun  1 04:27:05 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "fd_list.h"
 # include "socket.h"
 
 # define HOSTLEN 64
 # define SERVICELEN 20
+
+typedef struct s_client t_client;
+
+# include "fd_list.h"
 
 /*
 ** Be careful about the nomation
@@ -24,12 +27,12 @@
 ** They use the same struct because
 ** server could connect to another server (not implemented)
 */
-typedef struct	s_client
+struct		s_client
 {
   char		host[HOSTLEN + 1];
   char		service[SERVICELEN + 1];
   t_socket_info	sock;
-}		t_client;
+};
 
 /*
 ** This is memory of the clients
@@ -40,9 +43,7 @@ typedef struct	s_client
 typedef struct	s_irc_server
 {
   t_client	me;
-  t_client	clients[MAX_CONNECTIONS + 1];
   char		sig_handled;
-  int		highest_fd;
   t_fdset	secure_fdset;
 }		t_irc_server;
 

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 15:20:26 2017 Pierre Monge
-** Last update Mon May 29 23:42:34 2017 Pierre Monge
+** Last update Thu Jun  1 04:27:17 2017 Pierre Monge
 */
 
 #ifndef FD_LIST
@@ -17,12 +17,28 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-typedef struct	s_fdset
+typedef struct s_fdset t_fdset;
+
+struct		s_fdset
 {
   fd_set	read_fds;
   fd_set	write_fds;
+  int		highest_fd;
   int		num;
-}		t_fdset;
+};
+
+# include "struct.h"
+
+/*
+** global permit to optimize fd entry from accept
+** this is cool thing
+*/
+typedef struct	s_fd_entry
+{
+  int		fd;
+  char		is_open;
+}		t_fd_entry;
+extern t_fd_entry	fd_entry[MAX_CONNECTIONS + 1];
 
 /*
 ** These function interact with fd

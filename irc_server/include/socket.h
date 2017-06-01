@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 16:15:41 2017 Pierre Monge
-** Last update Tue May 30 06:23:55 2017 Pierre Monge
+** Last update Thu Jun  1 04:15:28 2017 Pierre Monge
 */
 
 #ifndef SOCKET_H
@@ -24,7 +24,6 @@
 ** socklen_t addr_len: len in memory of (addr)
 */
 typedef struct		s_socket_info {
-  unsigned char		is_open;
   int			fd;
   struct sockaddr_in	addr;
   socklen_t		addr_len;
