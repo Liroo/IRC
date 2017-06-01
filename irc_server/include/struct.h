@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Thu Jun  1 04:27:05 2017 Pierre Monge
+** Last update Thu Jun  1 08:06:14 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -18,6 +18,7 @@
 
 typedef struct s_client t_client;
 
+# include "list.h"
 # include "fd_list.h"
 
 /*
@@ -29,8 +30,7 @@ typedef struct s_client t_client;
 */
 struct		s_client
 {
-  char		host[HOSTLEN + 1];
-  char		service[SERVICELEN + 1];
+  t_list_head	*list;
   t_socket_info	sock;
 };
 
