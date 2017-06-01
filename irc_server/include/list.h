@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 06:11:17 2017 Pierre Monge
-** Last update Thu Jun  1 08:33:16 2017 Pierre Monge
+** Last update Thu Jun  1 09:54:22 2017 Pierre Monge
 */
 
 #ifndef LIST_H
@@ -71,6 +71,7 @@ t_list_head	*list_del(t_list_head *prev,
  */
 # define list_entry(ptr, type, member)		\
   container_of(ptr, type, member)
+
 /*
 ** list_add_tail - add a new entry
 ** new:		new entry to be added
@@ -83,6 +84,39 @@ static inline t_list_head	*list_add_tail(t_list_head *new,
 					       t_list_head *head)
 {
   return (list_add(new, head->prev, head));
+}
+
+/*
+** list_add_nose - add a new entry
+** new:		new entry to be added
+** head:	list head to add it before
+**
+** Insert a new entry after the specified head.
+** This is useful for implementing stack.
+*/
+static inline t_list_head	*list_add_nose(t_list_head *new,
+					       t_list_head *head)
+{
+  return (list_add(new, head, head->next));
+}
+
+
+/*
+** list_get_first - get the first list
+** head:	the head of the list
+*/
+static inline t_list_head	*list_get_first(t_list_head *head)
+{
+  return (head->next);
+}
+
+/*
+** list_get_last - get the last list
+** head:	the head of the list
+*/
+static inline t_list_head	*list_get_last(t_list_head *head)
+{
+  return (head->prev);
 }
 
 /*

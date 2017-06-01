@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Thu Jun  1 08:06:14 2017 Pierre Monge
+** Last update Thu Jun  1 11:21:41 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -26,41 +26,30 @@ typedef struct s_client t_client;
 ** A server is logicaly a client
 ** Note: a USER is not a server
 ** They use the same struct because
-** server could connect to another server (not implemented)
+** server could connect to another server
+** (not implemented (yet ? (Nahhh kiding, never)))
 */
 struct		s_client
 {
-  t_list_head	*list;
+  time_t	created_at;
+  t_list_head	list;
   t_socket_info	sock;
 };
 
 /*
-** This is memory of the clients
-** and some chanels
-** (me) is the server client itself
-** (clients) are the clients ordered by fd
+** This is memory of the clients and chanels
+**
+** Edit: We'll stock fd_set here to manage less global -- Pierre
+** Edit: Signal tester will be here (is this struct a trash memory ?) -- Pierre
 */
 typedef struct	s_irc_server
 {
+  t_list_head	connection_queue;
   t_client	me;
   char		sig_handled;
   t_fdset	secure_fdset;
 }		t_irc_server;
 
-/*
-** Global is defined for some reason:
-**
-** I had two choices, one where I had to create reference
-** of my struct server. The other was simply to pass the struct
-** w/o ref directly by the stack
-**
-** The two choices not enought optimized... One was passing by reference
-** create too much asm instructions (rdi) which is long.
-** The other was to pass by the stack but copying the same sruct
-** on top of the stack was memory horrible...
-**
-** The only way to optimize both things is to create an extern global
-*/
 extern t_irc_server	server;
 
 #endif /* !STRUCT_H */

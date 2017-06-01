@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 14:38:58 2017 Pierre Monge
-** Last update Thu Jun  1 06:03:47 2017 Pierre Monge
+** Last update Thu Jun  1 11:21:44 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -98,5 +98,8 @@ int		fd_accept(int sock_fd)
 	      (socklen_t *)&new_client->sock.addr_len);
   if (fd < 0)
     return (perror("accept"), -1);
-  return fd_add(fd);
+  if (fd_add(fd) == -1)
+    return (-1);
+  list_add_tail(&new_client->list, &server.connection_queue);
+  return (0);
 }

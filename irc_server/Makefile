@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:36 2017 Pierre Monge
-## Last update Thu Jun  1 08:00:36 2017 Pierre Monge
+## Last update Thu Jun  1 18:02:55 2017 Pierre Monge
 ##
 
 
@@ -27,7 +27,9 @@ SRC_GEN = \
 	fd_list.c \
 	sig.c \
 	event.c \
-	list.c
+	list.c \
+	fd_write.c \
+	rin_buffer.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 

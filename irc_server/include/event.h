@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:28:44 2017 Pierre Monge
-** Last update Wed May 31 06:17:36 2017 Pierre Monge
+** Last update Thu Jun  1 11:35:54 2017 Pierre Monge
 */
 
 #ifndef EVENT_H
@@ -24,9 +24,9 @@
 **
 ** I did not like it but I have to.
 ** The other way was to split the event_dispatch loop
-** in two function and the is horible to read...
+** in two function and this is horible to read...
 */
-# define FOR_ITERATION(it) it++; continue;
+# define FOR_ITERATION(it) it = it + 1; continue;
 
 int	event_dispatch(t_fdset fd_event);
 

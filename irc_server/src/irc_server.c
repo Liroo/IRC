@@ -5,17 +5,19 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 27 06:33:50 2017 Pierre Monge
-** Last update Thu Jun  1 04:28:17 2017 Pierre Monge
+** Last update Thu Jun  1 09:58:27 2017 Pierre Monge
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <time.h>
 
 #include "struct.h"
 #include "socket.h"
 #include "fd_list.h"
 #include "sig.h"
+#include "list.h"
 
 t_irc_server	server;
 
@@ -26,8 +28,10 @@ int		main(int argc, char *argv[])
   bzero(&server, sizeof(t_irc_server));
   bzero(&fd_entry, sizeof(t_fd_entry));
   server.secure_fdset.highest_fd = -1;
+  list_init(&server.connection_queue);
   if (socket_open(&server.me.sock, atoi(argv[1])) == -1)
     return (84);
+  server.me.created_at = time(NULL);
   FD_ZERO(&server.secure_fdset.read_fds);
   FD_SET(server.me.sock.fd, &server.secure_fdset.read_fds);
   server.secure_fdset.highest_fd = server.me.sock.fd;
