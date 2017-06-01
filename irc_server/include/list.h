@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 06:11:17 2017 Pierre Monge
-** Last update Thu Jun  1 08:27:23 2017 Pierre Monge
+** Last update Thu Jun  1 08:33:16 2017 Pierre Monge
 */
 
 #ifndef LIST_H
@@ -100,7 +100,7 @@ static inline int	list_is_last(const t_list_head *list,
 ** list_empty - tests whether a list is empty
 ** head:	the list to test.
 */
-static inline int list_empty(const t_list_head *head)
+static inline int	list_empty(const t_list_head *head)
 {
   return (head->next == head);
 }
