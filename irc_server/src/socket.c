@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 16:15:46 2017 Pierre Monge
-** Last update Tue May 30 08:22:44 2017 Pierre Monge
+** Last update Sat Jun 10 04:19:40 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -82,8 +82,11 @@ int		socket_loop()
       if (fd_event.num == 0)
 	continue;
       if (FD_ISSET(server.me.sock.fd, &fd_event.read_fds))
-	if (fd_accept(server.me.sock.fd) == -1)
-	  return (-1);
+	{
+	  if (fd_accept(server.me.sock.fd) == -1)
+	    return (-1);
+	  fd_event.num--;
+	}
       if (event_dispatch(fd_event) == -1)
 	return (-1);
       // TODO PING test based on time ?

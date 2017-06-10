@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 14:38:58 2017 Pierre Monge
-** Last update Thu Jun  1 11:21:44 2017 Pierre Monge
+** Last update Sat Jun 10 07:03:33 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -13,9 +13,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <strings.h>
+#include <string.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <signal.h>
+#include <time.h>
 #include "list.h"
 
 #include "fd_list.h"
@@ -24,7 +26,7 @@
 
 t_fd_entry	fd_entry[MAX_CONNECTIONS + 1];
 
-int		fd_add(int fd)
+int		fd_add(int fd, t_client *new_client)
 {
   t_fd_entry	*fde;
 
@@ -36,6 +38,7 @@ int		fd_add(int fd)
     server.secure_fdset.highest_fd = fd;
   fde->fd = fd;
   fde->is_open = 1;
+  fde->client = new_client;
   return (0);
 }
 
@@ -93,12 +96,15 @@ int		fd_accept(int sock_fd)
 
   if (!(new_client = malloc(sizeof(t_client))))
     return (perror("malloc"), -1);
+  bzero(new_client, sizeof(t_client));
   new_client->sock.addr_len = sizeof(new_client->sock.addr);
   fd = accept(sock_fd, (struct sockaddr *)&new_client->sock.addr,
 	      (socklen_t *)&new_client->sock.addr_len);
+  new_client->fd = fd;
+  new_client->created_at = time(NULL);
   if (fd < 0)
     return (perror("accept"), -1);
-  if (fd_add(fd) == -1)
+  if (fd_add(fd, new_client) == -1)
     return (-1);
   list_add_tail(&new_client->list, &server.connection_queue);
   return (0);

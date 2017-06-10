@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Thu Jun  1 11:21:41 2017 Pierre Monge
+** Last update Fri Jun  9 22:38:52 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -20,6 +20,7 @@ typedef struct s_client t_client;
 
 # include "list.h"
 # include "fd_list.h"
+# include "ring_buffer.h"
 
 /*
 ** Be careful about the nomation
@@ -31,16 +32,16 @@ typedef struct s_client t_client;
 */
 struct		s_client
 {
+  int		fd;
   time_t	created_at;
   t_list_head	list;
   t_socket_info	sock;
+  t_ring_buffer	read_buffer;
+  t_ring_buffer	write_buffer;
 };
 
 /*
 ** This is memory of the clients and chanels
-**
-** Edit: We'll stock fd_set here to manage less global -- Pierre
-** Edit: Signal tester will be here (is this struct a trash memory ?) -- Pierre
 */
 typedef struct	s_irc_server
 {

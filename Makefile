@@ -30,6 +30,7 @@ client:
 debug:
 	@make --no-print-directory -C $(SERVER) debug
 	@make --no-print-directory -C $(CLIENT) debug
+	@$(BUILD_SCRIPT) install `pwd`
 
 clean:
 	@make --no-print-directory -C $(SERVER) clean

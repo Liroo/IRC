@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 15:20:26 2017 Pierre Monge
-** Last update Thu Jun  1 04:27:17 2017 Pierre Monge
+** Last update Fri Jun  9 22:31:07 2017 Pierre Monge
 */
 
 #ifndef FD_LIST
@@ -37,6 +37,7 @@ typedef struct	s_fd_entry
 {
   int		fd;
   char		is_open;
+  t_client     	*client;
 }		t_fd_entry;
 extern t_fd_entry	fd_entry[MAX_CONNECTIONS + 1];
 
@@ -45,7 +46,7 @@ extern t_fd_entry	fd_entry[MAX_CONNECTIONS + 1];
 ** They add the fd to the fd_set list
 ** and one is doing the job of accept function
 */
-int	fd_add(int fd);
+int	fd_add(int fd, t_client *new_client);
 int	fd_remove(int fd);
 t_fdset	fd_select(time_t delay);
 int	fd_accept(int sock_fd);
