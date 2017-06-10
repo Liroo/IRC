@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 06:11:17 2017 Pierre Monge
-** Last update Thu Jun  1 09:54:22 2017 Pierre Monge
+** Last update Sat Jun 10 19:17:10 2017 Pierre Monge
 */
 
 #ifndef LIST_H
@@ -59,6 +59,14 @@ t_list_head	*list_add(t_list_head *new,
 */
 t_list_head	*list_del(t_list_head *prev,
 			  t_list_head *next);
+
+
+# ifndef offsetof
+#  include <stddef.h>
+#  ifndef offsetof
+#   define offsetof(st, m) ((size_t)(&((st *)0)->m))
+#  endif
+# endif
 
 # define container_of(ptr, type, member)	\
   (type*)((char*)(ptr) - offsetof(type, member))

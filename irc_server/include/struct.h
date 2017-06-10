@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Fri Jun  9 22:38:52 2017 Pierre Monge
+** Last update Sat Jun 10 19:00:25 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -38,6 +38,8 @@ struct		s_client
   t_socket_info	sock;
   t_ring_buffer	read_buffer;
   t_ring_buffer	write_buffer;
+
+  char		*nick;
 };
 
 /*
