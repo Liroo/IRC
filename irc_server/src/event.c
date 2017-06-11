@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:30:07 2017 Pierre Monge
-** Last update Sun Jun 11 03:59:43 2017 Pierre Monge
+** Last update Sun Jun 11 06:33:06 2017 Pierre Monge
 */
 
 #include <sys/time.h>
@@ -28,10 +28,10 @@ static int	event_read(int fd)
   if (!client)
     return (0);
   if (ring_buffer_read(&client->read_buffer, fd) <= 0)
-    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
+    return (command_quit(client, (t_client_command){{0}, 0, {0}, 0}));
   client->read_buffer.offset = 0;
   if (parse_buffer_to_token(client) == -1)
-    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
+    return (command_quit(client, (t_client_command){{0}, 0, {0}, 0}));
   return (0);
 }
 
@@ -43,7 +43,7 @@ static int	event_write(int fd)
   if (!client)
     return (0);
   if (client_write_once(client) == -1)
-    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
+    return (command_quit(client, (t_client_command){{0}, 0, {0}, 0}));
   return (0);
 }
 

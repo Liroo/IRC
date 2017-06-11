@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:46 2017 Pierre Monge
-** Last update Sun Jun 11 00:54:35 2017 Pierre Monge
+** Last update Sun Jun 11 07:49:45 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -65,7 +65,27 @@ t_client	*hash_table_find_client(t_hash_table *hash_table, char *key)
     {
       client = list_entry(list, struct s_client, list);
       if (strcmp(key, client->nick) == 0)
-	return (list_entry(list, struct s_client, list));
+	return (client);
+      list = list->next;
+    }
+  return (NULL);
+}
+
+t_channel	*hash_table_find_server(t_hash_table *hash_table, char *key)
+{
+  int		index;
+  t_list_head	*list;
+  t_list_head	*head;
+  t_channel	*channel;
+
+  index = hash_index(key);
+  head = &hash_table->table[index].list;
+  list = list_get_first(head);
+  while (list != head)
+    {
+      channel = list_entry(list, struct s_channel, list);
+      if (strcmp(key, channel->name) == 0)
+	return (channel);
       list = list->next;
     }
   return (NULL);

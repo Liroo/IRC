@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 01:29:14 2017 Pierre Monge
-** Last update Sun Jun 11 02:50:21 2017 Pierre Monge
+** Last update Sun Jun 11 06:39:32 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -66,13 +66,17 @@ static int		parse_token_to_command(char *token, t_client *client)
 {
   int			len;
   t_client_command	command;
+  int			i;
 
+  i = 0;
   len = strlen(token);
   bzero(&command, sizeof(t_command));
   if (token[len - 1] == '\r')
     token[len - 1] = '\0';
   command.title_end = parse_token_get_first_word(token, command.title);
   parse_token_to_arguments(command.args, MAX_COMMAND_ARGS_SIZE, token, " ");
+  while (command.args[i++]);
+  command.argc = i - 1;
   return (command_exec(client, command));
 }
 

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 03:07:33 2017 Pierre Monge
-** Last update Sun Jun 11 03:53:51 2017 Pierre Monge
+** Last update Sun Jun 11 05:13:05 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -19,7 +19,8 @@ static t_command	*get_command_list()
     { "quit", &command_quit },
     { "ping", &command_ping },
     { "user", &command_user },
-    { "users", &command_users }
+    { "users", &command_users },
+    { "privmsg", &command_privmsg }
   };
 
   return (command_list);

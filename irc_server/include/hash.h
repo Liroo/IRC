@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:20 2017 Pierre Monge
-** Last update Sat Jun 10 23:47:32 2017 Pierre Monge
+** Last update Sun Jun 11 07:47:52 2017 Pierre Monge
 */
 
 #ifndef HASH_H
@@ -39,7 +39,6 @@ void		hash_table_init(t_hash_table *hash_table);
 ** key: key used to know the index after hashing it
 ** list: entry to add
 */
-
 void		hash_table_insert(t_hash_table *hash_table,
 				  char *key,
 				  t_list_head *entry);
@@ -49,9 +48,15 @@ void		hash_table_insert(t_hash_table *hash_table,
 ** hash_table: hash table used to find
 ** key: key to find compared to nick of client
 */
-
 t_client	*hash_table_find_client(t_hash_table *hash_table,
 					char *key);
 
+/*
+** hash_table_find_channel - find channel in appropriate hash table
+** hash_table: hash table used to find
+** key: key to find compared to name of channel
+*/
+t_channel	*hash_table_find_server(t_hash_table *hash_table,
+					char *key);
 
 #endif /* !HASH_H */

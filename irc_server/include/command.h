@@ -5,14 +5,14 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 02:52:00 2017 Pierre Monge
-** Last update Sun Jun 11 04:03:25 2017 Pierre Monge
+** Last update Sun Jun 11 06:31:40 2017 Pierre Monge
 */
 
 #ifndef COMMAND_H
 # define COMMAND_H
 
 # define MAX_COMMAND_SIZE 32
-# define COMMAND_LIST_SIZE 5
+# define COMMAND_LIST_SIZE 6
 
 /*
 ** based on RFC maximum of arguments in a message is:
@@ -33,6 +33,7 @@ typedef struct	s_client_command
   char		title[MAX_COMMAND_SIZE + 1];
   int		title_end;
   char		*args[MAX_COMMAND_ARGS_SIZE + 1];
+  int		argc;
 }		t_client_command;
 
 typedef int	(*t_command_func)(t_client *client, t_client_command command);
@@ -70,6 +71,21 @@ int	command_exec(t_client *client, t_client_command command);
   "394 :End of users"				\
   "" CR_LF
 
+
+# define ERR_401				\
+  SRV_PRE ""					\
+  "%s :No such nick/channel"			\
+  "" CR_LF
+
+# define ERR_411				\
+  SRV_PRE ""					\
+  "411 :No recipient given (%s)"		\
+  "" CR_LF
+# define ERR_412				\
+  SRV_PRE ""					\
+  "412 :No text to send"			\
+  "" CR_LF
+
 # define ERR_431	   \
   SRV_PRE " "		   \
   "431 :No nickname given" \
@@ -82,6 +98,7 @@ int	command_exec(t_client *client, t_client_command command);
   SRV_PRE " "					\
   "433 %s :Nickname is already in use"		\
   "" CR_LF
+
 # define ERR_451				\
   SRV_PRE " "					\
   "451 :You have not registered"		\
@@ -90,9 +107,9 @@ int	command_exec(t_client *client, t_client_command command);
 /*
 ** Command list
 */
-# define RPL_NICK				\
+# define RPL_CMD				\
   SRV_PRE " "					\
-  "NICK :%s"					\
+  "%s :%s"					\
   "" CR_LF
 # define RPL_PING				\
   SRV_PRE " "					\
@@ -100,11 +117,16 @@ int	command_exec(t_client *client, t_client_command command);
   " " SRV_PRE					\
   " " SRV_PRE					\
   "" CR_LF
+# define RPL_PRIVMSG				\
+  SRV_PRE " "					\
+  "PRIVMSG %s :%s"					\
+  "" CR_LF
 
 int	command_nick(t_client *client, t_client_command command);
 int	command_quit(t_client *client, t_client_command command);
 int	command_ping(t_client *client, t_client_command command);
 int	command_user(t_client *client, t_client_command command);
 int	command_users(t_client *client, t_client_command command);
+int	command_privmsg(t_client *client, t_client_command command);
 
 #endif /* !COMMAND_H */

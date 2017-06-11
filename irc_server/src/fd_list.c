@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Mon May 29 14:38:58 2017 Pierre Monge
-** Last update Sun Jun 11 02:50:07 2017 Pierre Monge
+** Last update Sun Jun 11 07:30:56 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -102,6 +102,10 @@ int		fd_accept(int sock_fd)
 	      (socklen_t *)&new_client->sock.addr_len);
   new_client->fd = fd;
   new_client->created_at = time(NULL);
+  if (!(new_client->channels = malloc(sizeof(t_membership))))
+    return (-1);
+  bzero(new_client->channels, sizeof(t_membership));
+  new_client->channels->channel = NULL;
   if (fd < 0)
     return (perror("accept"), -1);
   if (fd_add(fd, new_client) == -1)

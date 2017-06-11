@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Sun Jun 11 04:00:58 2017 Pierre Monge
+** Last update Sun Jun 11 07:46:42 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -16,11 +16,24 @@
 # define HOSTLEN 64
 # define SERVICELEN 20
 
-typedef struct s_client t_client;
+typedef struct s_client		t_client;
+typedef struct s_channel	t_channel;
 
 # include "list.h"
 # include "fd_list.h"
 # include "ring_buffer.h"
+
+typedef struct		s_membership
+{
+  struct s_membership	*next;
+  t_channel		*channel;
+}			t_membership;
+
+typedef struct		s_member
+{
+  struct s_member	*next;
+  t_client		*client;
+}			t_member;
 
 /*
 ** Be careful about the nomation
@@ -42,7 +55,17 @@ struct		s_client
   t_ring_buffer	read_buffer;
   t_ring_buffer	write_buffer;
 
+  t_membership	*channels;
   char		*nick;
+};
+
+struct	s_channel
+{
+  time_t	created_at;
+  t_list_head	list;
+
+  t_member	*members;
+  char		*name;
 };
 
 # include "hash.h"
@@ -54,6 +77,7 @@ typedef struct	s_irc_server
 {
   t_list_head	connection_queue;
   t_hash_table	clients;
+  t_hash_table	channels;
   t_client	me;
   char		sig_handled;
   t_fdset	secure_fdset;

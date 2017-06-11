@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 27 06:33:50 2017 Pierre Monge
-** Last update Sat Jun 10 21:46:12 2017 Pierre Monge
+** Last update Sun Jun 11 07:19:01 2017 Pierre Monge
 */
 
 #include <stdio.h>
@@ -31,6 +31,7 @@ int		main(int argc, char *argv[])
   server.secure_fdset.highest_fd = -1;
   list_init(&server.connection_queue);
   hash_table_init(&server.clients);
+  hash_table_init(&server.channels);
   if (socket_open(&server.me.sock, atoi(argv[1])) == -1)
     return (84);
   server.me.created_at = time(NULL);

@@ -5,12 +5,27 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 05:00:26 2017 Pierre Monge
-** Last update Sat Jun 10 23:52:20 2017 Pierre Monge
+** Last update Sun Jun 11 07:28:47 2017 Pierre Monge
 */
 
 #include <stdlib.h>
 
 #include "command.h"
+
+static void	client_leave_channel(t_client *client)
+{
+  t_membership	*channel;
+  t_membership	*next;
+
+  channel = client->channels;
+  while (channel)
+    {
+      next = channel->next;
+      // TODO part from channel
+      free(channel);
+      channel = next;
+    }
+}
 
 int	command_quit(t_client *client, t_client_command command)
 {
@@ -21,6 +36,7 @@ int	command_quit(t_client *client, t_client_command command)
   FD_CLR(client->fd, &server.secure_fdset.write_fds);
   fd_remove(client->fd);
   socket_close(client->fd);
+  client_leave_channel(client);
   free(client);
   return (1);
 }
