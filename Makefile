@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:42 2017 Pierre Monge
-## Last update Sun Jun 11 18:24:01 2017 Pierre Monge
+## Last update Sun Jun 11 20:44:53 2017 Pierre Monge
 ##
 
 PROJECT := IRC
@@ -16,8 +16,6 @@ CLIENT = ./irc_client
 CLIENT_BIN = client
 CP = cp
 RM = rm -f
-
-.NOTPARALLEL:
 
 all:
 	@make --no-print-directory -C $(SERVER)
