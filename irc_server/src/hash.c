@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:46 2017 Pierre Monge
-** Last update Sun Jun 11 07:49:45 2017 Pierre Monge
+** Last update Sun Jun 11 13:43:27 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -71,7 +71,7 @@ t_client	*hash_table_find_client(t_hash_table *hash_table, char *key)
   return (NULL);
 }
 
-t_channel	*hash_table_find_server(t_hash_table *hash_table, char *key)
+t_channel	*hash_table_find_channel(t_hash_table *hash_table, char *key)
 {
   int		index;
   t_list_head	*list;

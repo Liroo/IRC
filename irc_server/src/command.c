@@ -5,12 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 03:07:33 2017 Pierre Monge
-** Last update Sun Jun 11 08:31:40 2017 Pierre Monge
+** Last update Sun Jun 11 13:50:20 2017 Pierre Monge
 */
 
 #include <strings.h>
 
 #include "command.h"
+#include "client_write.h"
 
 static t_command	*get_command_list()
 {
@@ -43,6 +44,6 @@ int		command_exec(t_client *client, t_client_command command)
 	return (command_list[i].exec(client, command));
       i++;
     }
-  // here we should handle message to channel
+  client_write_buffer(client, ERR_421, command.args[0]);
   return (0);
 }

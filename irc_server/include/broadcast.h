@@ -5,13 +5,22 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 09:00:17 2017 Pierre Monge
-** Last update Sun Jun 11 09:38:13 2017 Pierre Monge
+** Last update Sun Jun 11 13:52:09 2017 Pierre Monge
 */
 
 #ifndef BROADCAST_H
 # define BROADCAST_H
 
 # include "struct.h"
+
+/*
+** broadcast_message_channel - broadcast a message to a channel
+** client: client sending the message
+** channel: channel to send to message
+** message: message to send
+*/
+void	broadcast_message_channel(t_client *client, t_channel *channel,
+				  char *message);
 
 /*
 ** broadcast_join_channel - broadcast to all member the joining of a new member

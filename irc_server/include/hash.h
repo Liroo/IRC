@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:20 2017 Pierre Monge
-** Last update Sun Jun 11 07:47:52 2017 Pierre Monge
+** Last update Sun Jun 11 13:40:59 2017 Pierre Monge
 */
 
 #ifndef HASH_H
@@ -56,7 +56,7 @@ t_client	*hash_table_find_client(t_hash_table *hash_table,
 ** hash_table: hash table used to find
 ** key: key to find compared to name of channel
 */
-t_channel	*hash_table_find_server(t_hash_table *hash_table,
+t_channel	*hash_table_find_channel(t_hash_table *hash_table,
 					char *key);
 
 #endif /* !HASH_H */

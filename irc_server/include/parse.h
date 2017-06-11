@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 01:23:48 2017 Pierre Monge
-** Last update Sat Jun 10 21:17:15 2017 Pierre Monge
+** Last update Sun Jun 11 13:40:19 2017 Pierre Monge
 */
 
 #ifndef PARSE_H
@@ -26,6 +26,6 @@ typedef struct	s_token
 */
 int	parse_buffer_to_token(t_client *client);
 void	parse_token_to_arguments(char **sarray, int size,
-				 char *str, char *delimiter);
+				 char *str);
 
 #endif /* !PARSE_H */

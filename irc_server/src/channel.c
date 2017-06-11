@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 07:32:23 2017 Pierre Monge
-** Last update Sun Jun 11 11:01:14 2017 Pierre Monge
+** Last update Sun Jun 11 13:05:57 2017 Pierre Monge
 */
 
 #include <stdlib.h>
@@ -22,6 +22,7 @@ t_channel	*channel_create(char *name)
 
   if (!(new_channel = malloc(sizeof(t_channel))))
     return (NULL);
+  bzero(new_channel, sizeof(t_channel));
   if (!(new_channel->name = strdup(name)))
     return (NULL);
   if (!(new_channel->clients = malloc(sizeof(t_member))))
@@ -62,6 +63,7 @@ int	channel_insert_user(t_channel *channel, t_client *client)
   membership->next = client->channels->next;
   membership->channel = channel;
   client->channels->next = membership;
+  channel->clients_size += 1;
   return (0);
 }
 
@@ -103,6 +105,7 @@ void		channel_delete_user(t_channel *channel, t_client *client)
 	}
     }
   channel_user_delete_channel(channel, client);
+  channel->clients_size -= 1;
   if (channel->clients->next == NULL)
     {
       list_del(channel->list.prev, channel->list.next);

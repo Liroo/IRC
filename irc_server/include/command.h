@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 02:52:00 2017 Pierre Monge
-** Last update Sun Jun 11 11:06:45 2017 Pierre Monge
+** Last update Sun Jun 11 13:50:02 2017 Pierre Monge
 */
 
 #ifndef COMMAND_H
@@ -59,6 +59,19 @@ int	command_exec(t_client *client, t_client_command command);
   "001 %s :Welcome to the Internet Relay Network" \
   "" CR_LF
 
+# define RPL_321				  \
+  SRV_PRE " "					  \
+  "321 Channel :Users  Name"			  \
+  "" CR_LF
+# define RPL_322				  \
+  SRV_PRE " "					  \
+  "322 %s %d :%s"				  \
+  "" CR_LF
+# define RPL_323				  \
+  SRV_PRE " "					  \
+  "323 :End of /LIST"				  \
+  "" CR_LF
+
 # define RPL_332				  \
   SRV_PRE " "					  \
   "332 %s :%s"					  \
@@ -95,6 +108,10 @@ int	command_exec(t_client *client, t_client_command command);
   SRV_PRE " "					\
   "403 %s :No such channel"			\
   "" CR_LF
+# define ERR_404				\
+  SRV_PRE " "					\
+  "404 %s :Cannot send to channel"		\
+  "" CR_LF
 # define ERR_405							\
   SRV_PRE " "								\
   "405 %s :You have joined too many channels"				\
@@ -107,6 +124,11 @@ int	command_exec(t_client *client, t_client_command command);
 # define ERR_412				\
   SRV_PRE " "					\
   "412 :No text to send"			\
+  "" CR_LF
+
+# define ERR_421				\
+  SRV_PRE " "					\
+  "421 %s :Unknown command"			\
   "" CR_LF
 
 # define ERR_431	   \
@@ -160,8 +182,7 @@ int	command_exec(t_client *client, t_client_command command);
   ":%s PART %s"					\
   "" CR_LF
 # define RPL_PRIVMSG				\
-  SRV_PRE " "					\
-  "PRIVMSG %s :%s"				\
+  ":%s PRIVMSG %s :%s"				\
   "" CR_LF
 
 int	command_nick(t_client *client, t_client_command command);

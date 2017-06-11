@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Sun Jun 11 07:56:49 2017 Pierre Monge
+** Last update Sun Jun 11 12:51:31 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -65,6 +65,7 @@ struct	s_channel
   t_list_head	list;
 
   t_member	*clients;
+  int		clients_size;
   char		*name;
 };
 

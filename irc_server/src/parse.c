@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 01:29:14 2017 Pierre Monge
-** Last update Sun Jun 11 06:39:32 2017 Pierre Monge
+** Last update Sun Jun 11 13:45:46 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -16,10 +16,11 @@
 #include "command.h"
 
 void	parse_token_to_arguments(char **sarray, int size,
-				 char *str, char *delimiter)
+				 char *str)
 {
   int	i;
   char	*buf;
+  char	*message;
 
   i = 0;
   buf = NULL;
@@ -28,17 +29,18 @@ void	parse_token_to_arguments(char **sarray, int size,
       sarray[0] = NULL;
       return ;
     }
-  buf = strtok(str, delimiter);
+  strtok(str, ":");
+  message = strtok(NULL, ":");
+  buf = strtok(str, " ");
   sarray[i++] = buf;
   while (i < size && buf)
     {
-      buf = strtok(NULL, delimiter);
-      sarray[i] = buf;
-      i++;
+      buf = strtok(NULL, " ");
+      sarray[i++] = buf;
     }
-  if (buf) {
-    sarray[i] = NULL;
-  }
+  if (!buf)
+    sarray[i - 1] = message;
+  sarray[i] = NULL;
 }
 
 static int	parse_token_get_first_word(char *token, char *command_title)
@@ -74,7 +76,7 @@ static int		parse_token_to_command(char *token, t_client *client)
   if (token[len - 1] == '\r')
     token[len - 1] = '\0';
   command.title_end = parse_token_get_first_word(token, command.title);
-  parse_token_to_arguments(command.args, MAX_COMMAND_ARGS_SIZE, token, " ");
+  parse_token_to_arguments(command.args, MAX_COMMAND_ARGS_SIZE, token);
   while (command.args[i++]);
   command.argc = i - 1;
   return (command_exec(client, command));

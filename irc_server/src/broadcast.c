@@ -5,12 +5,27 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:57:07 2017 Pierre Monge
-** Last update Sun Jun 11 11:27:37 2017 Pierre Monge
+** Last update Sun Jun 11 13:30:48 2017 Pierre Monge
 */
 
 #include "broadcast.h"
 #include "command.h"
 #include "client_write.h"
+
+void	broadcast_message_channel(t_client *client, t_channel *channel,
+				  char *message)
+{
+  t_member	*member;
+
+  member = channel->clients->next;
+  while (member)
+    {
+      if (member->client != client)
+	client_write_buffer(member->client, RPL_PRIVMSG, client->nick,
+			    client->nick, message);
+      member = member->next;
+    }
+}
 
 void		broadcast_join_channel(t_client *client, t_channel *channel)
 {
