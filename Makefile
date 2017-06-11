@@ -5,21 +5,25 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:42 2017 Pierre Monge
-## Last update Sat May 27 06:36:37 2017 Pierre Monge
+## Last update Sun Jun 11 18:24:01 2017 Pierre Monge
 ##
 
 PROJECT := IRC
 
 SERVER = ./irc_server
+SERVER_BIN = server
 CLIENT = ./irc_client
-BUILD_SCRIPT = ./install.sh
+CLIENT_BIN = client
+CP = cp
+RM = rm -f
 
 .NOTPARALLEL:
 
 all:
 	@make --no-print-directory -C $(SERVER)
 	@make --no-print-directory -C $(CLIENT)
-	@$(BUILD_SCRIPT) install `pwd`
+	$(CP) $(SERVER)/$(SERVER_BIN) .
+	$(CP) $(CLIENT)/$(CLIENT_BIN) .
 
 server:
 	@make --no-print-directory -C $(SERVER)
@@ -30,7 +34,6 @@ client:
 debug:
 	@make --no-print-directory -C $(SERVER) debug
 	@make --no-print-directory -C $(CLIENT) debug
-	@$(BUILD_SCRIPT) install `pwd`
 
 clean:
 	@make --no-print-directory -C $(SERVER) clean
@@ -39,7 +42,8 @@ clean:
 fclean:
 	@make --no-print-directory -C $(SERVER) fclean
 	@make --no-print-directory -C $(CLIENT) fclean
-	@$(BUILD_SCRIPT) uninstall `pwd`
+	$(RM) $(SERVER_BIN)
+	$(RM) $(CLIENT_BIN)
 
 re: fclean all
 
