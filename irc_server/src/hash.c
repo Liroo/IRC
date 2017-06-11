@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:46 2017 Pierre Monge
-** Last update Sat Jun 10 19:21:09 2017 Pierre Monge
+** Last update Sun Jun 11 00:54:35 2017 Pierre Monge
 */
 
 #include <string.h>

@@ -5,14 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 07:07:20 2017 Pierre Monge
-** Last update Sat Jun 10 19:20:39 2017 Pierre Monge
+** Last update Sat Jun 10 23:47:32 2017 Pierre Monge
 */
 
 #ifndef HASH_H
 # define HASH_H
 
 # include "list.h"
-# include "struct.h"
 
 typedef struct	s_hash_entry
 {
@@ -25,6 +24,8 @@ typedef struct	s_hash_table
 {
   t_hash_entry	table[HASH_TABLE_SIZE];
 }		t_hash_table;
+
+# include "struct.h"
 
 /*
 ** hash_table_init - init new hash table

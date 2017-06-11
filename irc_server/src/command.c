@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 03:07:33 2017 Pierre Monge
-** Last update Sat Jun 10 05:38:15 2017 Pierre Monge
+** Last update Sun Jun 11 03:53:51 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -16,7 +16,10 @@ static t_command	*get_command_list()
 {
   static t_command	command_list[COMMAND_LIST_SIZE] = {
     { "nick", &command_nick },
-    { "quit", &command_quit }
+    { "quit", &command_quit },
+    { "ping", &command_ping },
+    { "user", &command_user },
+    { "users", &command_users }
   };
 
   return (command_list);

@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:36 2017 Pierre Monge
-## Last update Sat Jun 10 07:08:01 2017 Pierre Monge
+## Last update Sun Jun 11 03:54:19 2017 Pierre Monge
 ##
 
 
@@ -28,14 +28,17 @@ SRC_GEN = \
 	sig.c \
 	event.c \
 	list.c \
-	fd_write.c \
 	ring_buffer.c \
 	parse.c \
 	command.c \
 	hash.c \
+	client_write.c \
 	\
 	commands/c_nick.c \
-	commands/c_quit.c
+	commands/c_quit.c \
+	commands/c_ping.c \
+	commands/c_user.c \
+	commands/c_users.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 

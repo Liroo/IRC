@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 27 06:33:50 2017 Pierre Monge
-** Last update Thu Jun  1 09:58:27 2017 Pierre Monge
+** Last update Sat Jun 10 21:46:12 2017 Pierre Monge
 */
 
 #include <stdio.h>
@@ -18,6 +18,7 @@
 #include "fd_list.h"
 #include "sig.h"
 #include "list.h"
+#include "hash.h"
 
 t_irc_server	server;
 
@@ -29,6 +30,7 @@ int		main(int argc, char *argv[])
   bzero(&fd_entry, sizeof(t_fd_entry));
   server.secure_fdset.highest_fd = -1;
   list_init(&server.connection_queue);
+  hash_table_init(&server.clients);
   if (socket_open(&server.me.sock, atoi(argv[1])) == -1)
     return (84);
   server.me.created_at = time(NULL);

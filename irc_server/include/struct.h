@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 18:00:10 2017 Pierre Monge
-** Last update Sat Jun 10 19:00:25 2017 Pierre Monge
+** Last update Sun Jun 11 04:00:58 2017 Pierre Monge
 */
 
 #ifndef STRUCT_H
@@ -29,6 +29,9 @@ typedef struct s_client t_client;
 ** They use the same struct because
 ** server could connect to another server
 ** (not implemented (yet ? (Nahhh kiding, never)))
+**
+**
+** Note: get a nick significate client is authenticated -- Pierre
 */
 struct		s_client
 {
@@ -42,12 +45,15 @@ struct		s_client
   char		*nick;
 };
 
+# include "hash.h"
+
 /*
 ** This is memory of the clients and chanels
 */
 typedef struct	s_irc_server
 {
   t_list_head	connection_queue;
+  t_hash_table	clients;
   t_client	me;
   char		sig_handled;
   t_fdset	secure_fdset;

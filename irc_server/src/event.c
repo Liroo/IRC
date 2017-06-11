@@ -5,35 +5,45 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Tue May 30 06:30:07 2017 Pierre Monge
-** Last update Sat Jun 10 07:12:36 2017 Pierre Monge
+** Last update Sun Jun 11 03:59:43 2017 Pierre Monge
 */
 
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #include "struct.h"
 #include "event.h"
 #include "fd_list.h"
 #include "parse.h"
 #include "command.h"
+#include "client_write.h"
 
 static int	event_read(int fd)
 {
   t_client	*client;
 
   client = fd_entry[fd].client;
+  if (!client)
+    return (0);
   if (ring_buffer_read(&client->read_buffer, fd) <= 0)
-    return (command_quit(client, (t_client_command){{0}, 0, 0}));
+    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
   client->read_buffer.offset = 0;
   if (parse_buffer_to_token(client) == -1)
-    return (command_quit(client, (t_client_command){{0}, 0, 0}));
+    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
   return (0);
 }
 
 static int	event_write(int fd)
 {
-  (void)fd;
+  t_client	*client;
+
+  client = fd_entry[fd].client;
+  if (!client)
+    return (0);
+  if (client_write_once(client) == -1)
+    return (command_quit(client, (t_client_command){{0}, 0, {0}}));
   return (0);
 }
 
