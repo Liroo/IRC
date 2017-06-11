@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 27 06:33:50 2017 Pierre Monge
-** Last update Sun Jun 11 07:19:01 2017 Pierre Monge
+** Last update Sun Jun 11 14:39:29 2017 Pierre Monge
 */
 
 #include <stdio.h>
@@ -19,8 +19,80 @@
 #include "sig.h"
 #include "list.h"
 #include "hash.h"
+#include "channel.h"
 
 t_irc_server	server;
+
+void	delete_client(t_client *client)
+{
+  t_membership	*channel;
+  t_membership	*next;
+
+  list_del(client->list.prev, &client->list);
+  socket_close(client->fd);
+  FD_CLR(client->fd, &server.secure_fdset.write_fds);
+  fd_remove(client->fd);
+  channel = client->channels;
+  while (channel)
+    {
+      next = channel->next;
+      if (channel->channel)
+	channel_delete_user(channel->channel, client);
+      channel = next;
+    }
+  free(client->channels);
+  if (client->nick)
+    free(client->nick);
+  free(client);
+}
+
+void	free_registered_client()
+{
+  t_client	*client;
+  t_list_head	*head;
+  t_list_head	*pos;
+  t_list_head	*next_safe;
+  int		i;
+
+  i = 0;
+  while (i < HASH_TABLE_SIZE)
+    {
+      head = &server.clients.table[i].list;
+      pos = list_get_first(head);
+      while (pos != head)
+	{
+	  next_safe = pos->next;
+	  client = list_entry(pos, t_client, list);
+	  delete_client(client);
+	  pos = next_safe;
+	}
+      i++;
+    }
+}
+
+void	free_not_registered_client()
+{
+  t_client	*client;
+  t_list_head	*head;
+  t_list_head	*pos;
+  t_list_head	*next_safe;
+
+  head = &server.connection_queue;
+  pos = list_get_first(head);
+  while (pos != head)
+    {
+      next_safe = pos->next;
+      client = list_entry(pos, t_client, list);
+      delete_client(client);
+      pos = next_safe;
+    }
+}
+
+void		free_irc_server()
+{
+  free_not_registered_client();
+  free_registered_client();
+}
 
 int		main(int argc, char *argv[])
 {
@@ -43,5 +115,6 @@ int		main(int argc, char *argv[])
     return (socket_close(server.me.sock.fd), 84);
   if (socket_close(server.me.sock.fd) == -1)
     return (84);
+  free_irc_server();
   return (0);
 }
