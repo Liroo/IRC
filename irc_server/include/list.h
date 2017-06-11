@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 06:11:17 2017 Pierre Monge
-** Last update Sat Jun 10 19:17:10 2017 Pierre Monge
+** Last update Sun Jun 11 14:45:06 2017 Pierre Monge
 */
 
 #ifndef LIST_H
@@ -71,12 +71,12 @@ t_list_head	*list_del(t_list_head *prev,
 # define container_of(ptr, type, member)	\
   (type*)((char*)(ptr) - offsetof(type, member))
 
-/**
- * list_entry - get the struct for this entry
- * ptr:		the &struct list_head pointer.
- * type:	the type of the struct this is embedded in.
- * member:	the name of the list_head within the struct.
- */
+/*
+** list_entry - get the struct for this entry
+** ptr:		the &struct list_head pointer.
+** type:	the type of the struct this is embedded in.
+** member:	the name of the list_head within the struct.
+*/
 # define list_entry(ptr, type, member)		\
   container_of(ptr, type, member)
 

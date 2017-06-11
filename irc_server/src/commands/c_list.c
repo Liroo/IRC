@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:30:06 2017 Pierre Monge
-** Last update Sun Jun 11 13:04:17 2017 Pierre Monge
+** Last update Sun Jun 11 14:48:12 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -14,18 +14,14 @@
 #include "list.h"
 #include "client_write.h"
 
-int		command_list(t_client *client, t_client_command command)
+static void	list_get_channel(t_client *client, char *sstr)
 {
   t_channel	*channel;
   t_list_head	*head;
   t_list_head	*pos;
   int		i;
-  char		*sstr;
 
-  if (!client->nick)
-    return (client_write_buffer(client, ERR_451), 0);
   i = 0;
-  sstr = command.args[1];
   client_write_buffer(client, RPL_321);
   while (i < HASH_TABLE_SIZE)
     {
@@ -42,5 +38,12 @@ int		command_list(t_client *client, t_client_command command)
       i++;
     }
   client_write_buffer(client, RPL_323);
+}
+
+int		command_list(t_client *client, t_client_command command)
+{
+  if (!client->nick)
+    return (client_write_buffer(client, ERR_451), 0);
+  list_get_channel(client, command.args[1]);
   return (0);
 }

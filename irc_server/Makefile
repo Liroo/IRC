@@ -1,11 +1,11 @@
 ##
 ## Makefile<irc_server> for IRC_SERVER in /Users/pierre/Epitech/PSU/IRC
-## 
+##
 ## Made by Pierre Monge
 ## Login   <pierre@epitech.net>
-## 
+##
 ## Started on  Sat May 27 06:30:36 2017 Pierre Monge
-## Last update Sun Jun 11 08:57:01 2017 Pierre Monge
+## Last update Sun Jun 11 14:44:27 2017 Pierre Monge
 ##
 
 

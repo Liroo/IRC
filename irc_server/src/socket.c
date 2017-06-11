@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 28 16:15:46 2017 Pierre Monge
-** Last update Sat Jun 10 04:19:40 2017 Pierre Monge
+** Last update Sun Jun 11 14:43:02 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -89,7 +89,6 @@ int		socket_loop()
 	}
       if (event_dispatch(fd_event) == -1)
 	return (-1);
-      // TODO PING test based on time ?
     }
   return (0);
 }
