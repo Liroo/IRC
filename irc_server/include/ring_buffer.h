@@ -5,13 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 18:01:45 2017 Pierre Monge
-** Last update Sat Jun 10 04:58:05 2017 Pierre Monge
+** Last update Sun Jun 11 17:13:33 2017 Pierre Monge
 */
 
 #ifndef RING_BUFFER_H
 # define RING_BUFFER_H
 
-# define MAX_BUFFER_SIZE 4096
+# define MAX_BUFFER_SIZE 8192
 
 typedef struct	s_ring_buffer
 {

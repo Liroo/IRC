@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 05:00:26 2017 Pierre Monge
-** Last update Sun Jun 11 14:40:48 2017 Pierre Monge
+** Last update Sun Jun 11 17:10:43 2017 Pierre Monge
 */
 
 #include <stdlib.h>
@@ -35,13 +35,13 @@ static void	client_leave_channel(t_client *client)
 int	command_quit(t_client *client, t_client_command command)
 {
   (void)command;
-  if (client->nick)
-    free(client->nick);
   list_del(client->list.prev, client->list.next);
   FD_CLR(client->fd, &server.secure_fdset.write_fds);
   fd_remove(client->fd);
   socket_close(client->fd);
   client_leave_channel(client);
+  if (client->nick)
+    free(client->nick);
   free(client);
   return (1);
 }
