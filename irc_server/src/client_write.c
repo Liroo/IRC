@@ -5,11 +5,12 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Thu Jun  1 11:51:58 2017 Pierre Monge
-** Last update Sun Jun 11 03:58:11 2017 Pierre Monge
+** Last update Sun Jun 11 19:02:40 2017 Pierre Monge
 */
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "client_write.h"
 #include "fd_list.h"
@@ -46,5 +47,9 @@ int	client_write_once(t_client *client)
   client->write_buffer.offset -= write_ret;
   if (client->write_buffer.offset == 0)
     FD_CLR(client->fd, &server.secure_fdset.write_fds);
+  else
+    memmove(client->write_buffer.buffer,
+	    &client->write_buffer.buffer[write_ret],
+	    client->write_buffer.offset);
   return (0);
 }
