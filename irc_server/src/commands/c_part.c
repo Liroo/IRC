@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:30:29 2017 Pierre Monge
-** Last update Sun Jun 11 13:42:28 2017 Pierre Monge
+** Last update Sun Jun 11 16:50:57 2017 Pierre Monge
 */
 
 #include "command.h"
@@ -34,12 +34,14 @@ int		command_part(t_client *client, t_client_command command)
   if (!client->nick)
     return (client_write_buffer(client, ERR_451), 0);
   if (command.argc < 2)
-    return (client_write_buffer(client, ERR_461, "PART"), 0);
+    return (client_write_buffer(client, ERR_461, client->nick, "PART"), 0);
   channel = hash_table_find_channel(&server.channels, command.args[1]);
   if (!channel)
-    return (client_write_buffer(client, ERR_403, command.args[1]), 0);
+    return (client_write_buffer(client, ERR_403, client->nick,
+				command.args[1]), 0);
   if (!client_is_member(channel, client))
-    return (client_write_buffer(client, ERR_442, command.args[1]), 0);
+    return (client_write_buffer(client, ERR_442, client->nick,
+				command.args[1]), 0);
   client_write_buffer(client, RPL_PART, client->nick, channel->name);
   broadcast_part_channel(client, channel);
   channel_delete_user(channel, client);

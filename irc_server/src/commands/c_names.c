@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:30:16 2017 Pierre Monge
-** Last update Sun Jun 11 13:42:39 2017 Pierre Monge
+** Last update Sun Jun 11 16:49:53 2017 Pierre Monge
 */
 
 #include "command.h"
@@ -16,7 +16,8 @@ static void	names_list_users(t_client *client, t_channel *channel)
   t_member	*member;
 
   member = channel->clients->next;
-  client_write_buffer(client, RPL_353, channel->name, channel->name);
+  client_write_buffer(client, RPL_353, client->nick,
+		      channel->name);
   while (member)
     {
       client_write_buffer(client, member->client->nick);
@@ -25,7 +26,7 @@ static void	names_list_users(t_client *client, t_channel *channel)
       member = member->next;
     }
   client_write_buffer(client, CR_LF);
-  client_write_buffer(client, RPL_366, channel->name);
+  client_write_buffer(client, RPL_366, client->nick, channel->name);
 }
 
 int	command_names(t_client *client, t_client_command command)
@@ -35,10 +36,11 @@ int	command_names(t_client *client, t_client_command command)
   if (!client->nick)
     return (client_write_buffer(client, ERR_451), 0);
   if (command.argc < 2)
-    return (client_write_buffer(client, ERR_461, "NAMES"), 0);
+    return (client_write_buffer(client, ERR_461, client->nick, "NAMES"), 0);
   channel = hash_table_find_channel(&server.channels, command.args[1]);
   if (!channel)
-    return (client_write_buffer(client, ERR_403, command.args[1]), 0);
+    return (client_write_buffer(client, ERR_403, client->nick,
+				command.args[1]), 0);
   names_list_users(client, channel);
   return (0);
 }

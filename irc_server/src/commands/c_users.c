@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 03:22:27 2017 Pierre Monge
-** Last update Sun Jun 11 09:46:37 2017 Pierre Monge
+** Last update Sun Jun 11 16:53:40 2017 Pierre Monge
 */
 
 #include "command.h"
@@ -24,7 +24,7 @@ static void	print_client_nick(t_client *client, t_hash_entry *entry)
   while (pos != head)
     {
       client_pos = list_entry(pos, t_client, list);
-      client_write_buffer(client, RPL_393, client_pos->nick);
+      client_write_buffer(client, RPL_393, client->nick, client_pos->nick);
       pos = pos->next;
     }
 }
@@ -37,12 +37,12 @@ int	command_users(t_client *client, t_client_command command)
   i = 0;
   if (!client->nick)
     return (client_write_buffer(client, ERR_451), 0);
-  client_write_buffer(client, RPL_392);
+  client_write_buffer(client, RPL_392, client->nick);
   while (i < HASH_TABLE_SIZE)
     {
       print_client_nick(client, &server.clients.table[i]);
       i++;
     }
-  client_write_buffer(client, RPL_394);
+  client_write_buffer(client, RPL_394, client->nick);
   return (0);
 }

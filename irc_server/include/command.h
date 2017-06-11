@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 02:52:00 2017 Pierre Monge
-** Last update Sun Jun 11 13:50:02 2017 Pierre Monge
+** Last update Sun Jun 11 16:53:52 2017 Pierre Monge
 */
 
 #ifndef COMMAND_H
@@ -61,69 +61,69 @@ int	command_exec(t_client *client, t_client_command command);
 
 # define RPL_321				  \
   SRV_PRE " "					  \
-  "321 Channel :Users  Name"			  \
+  "321 %s Channel :Users  Name"			  \
   "" CR_LF
 # define RPL_322				  \
   SRV_PRE " "					  \
-  "322 %s %d :%s"				  \
+  "322 %s %s %d :%s"				  \
   "" CR_LF
 # define RPL_323				  \
   SRV_PRE " "					  \
-  "323 :End of /LIST"				  \
+  "323 %s :End of /LIST"			  \
   "" CR_LF
 
 # define RPL_332				  \
   SRV_PRE " "					  \
-  "332 %s :%s"					  \
+  "332 %s %s :%s"				  \
   "" CR_LF
 
 # define RPL_353				  \
   SRV_PRE " "					  \
-  "353 %s :"
+  "353 %s %s :"
 
 # define RPL_366				  \
   SRV_PRE " "					  \
-  "366 %s :End of /NAMES list"			  \
+  "366 %s %s :End of /NAMES list"		  \
   "" CR_LF
 
 # define RPL_392				\
   SRV_PRE " "					\
-  "392 :UserID"					\
+  "392 %s :UserID"				\
   "" CR_LF
 # define RPL_393				\
   SRV_PRE " "					\
-  "393 :%-8s"					\
+  "393 %s :%-8s"				\
   "" CR_LF
 # define RPL_394				\
   SRV_PRE " "					\
-  "394 :End of users"				\
+  "394 %s :End of users"			\
   "" CR_LF
 
 
 # define ERR_401				\
   SRV_PRE " "					\
-  "401 %s :No such nick/channel"		\
+  "401 %s %s :No such nick/channel"		\
   "" CR_LF
 # define ERR_403				\
   SRV_PRE " "					\
-  "403 %s :No such channel"			\
+  "403 %s %s :No such channel"			\
   "" CR_LF
 # define ERR_404				\
   SRV_PRE " "					\
-  "404 %s :Cannot send to channel"		\
+  "404 %s %s :Cannot send to channel"		\
   "" CR_LF
 # define ERR_405							\
   SRV_PRE " "								\
-  "405 %s :You have joined too many channels"				\
+  "405 %s %s :You have joined too many channels"			\
   "" CR_LF
 
 # define ERR_411				\
   SRV_PRE " "					\
-  "411 :No recipient given (%s)"		\
+  "411 %s :No recipient given (%s)"		\
   "" CR_LF
 # define ERR_412				\
   SRV_PRE " "					\
-  "412 :No text to send"			\
+  "412 %s :No text to send"			\
   "" CR_LF
 
 # define ERR_421				\
@@ -146,7 +146,7 @@ int	command_exec(t_client *client, t_client_command command);
 
 # define ERR_442				\
   SRV_PRE " "					\
-  "442 %s :You're not on that channel"		\
+  "442 %s P%s :You're not on that channel"	\
   "" CR_LF
 
 # define ERR_451				\
@@ -156,7 +156,7 @@ int	command_exec(t_client *client, t_client_command command);
 
 # define ERR_461				\
   SRV_PRE " "					\
-  "461 %s :Not enough parameters"		\
+  "461 %s %s :Not enough parameters"		\
   "" CR_LF
 
 /*

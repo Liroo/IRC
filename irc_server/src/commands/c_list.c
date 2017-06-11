@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:30:06 2017 Pierre Monge
-** Last update Sun Jun 11 14:48:12 2017 Pierre Monge
+** Last update Sun Jun 11 16:40:00 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -22,7 +22,7 @@ static void	list_get_channel(t_client *client, char *sstr)
   int		i;
 
   i = 0;
-  client_write_buffer(client, RPL_321);
+  client_write_buffer(client, RPL_321, client->nick);
   while (i < HASH_TABLE_SIZE)
     {
       head = &server.channels.table[i].list;
@@ -31,13 +31,13 @@ static void	list_get_channel(t_client *client, char *sstr)
 	{
 	  channel = list_entry(pos, t_channel, list);
 	  if (!sstr || (sstr && strcasestr(channel->name, sstr)))
-	    client_write_buffer(client, RPL_322, channel->name,
+	    client_write_buffer(client, RPL_322, client->nick, channel->name,
 				channel->clients_size, channel->name);
 	  pos = pos->next;
 	}
       i++;
     }
-  client_write_buffer(client, RPL_323);
+  client_write_buffer(client, RPL_323, client->nick);
 }
 
 int		command_list(t_client *client, t_client_command command)

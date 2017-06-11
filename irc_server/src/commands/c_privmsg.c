@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 05:10:24 2017 Pierre Monge
-** Last update Sun Jun 11 13:41:51 2017 Pierre Monge
+** Last update Sun Jun 11 16:52:05 2017 Pierre Monge
 */
 
 #include "command.h"
@@ -33,9 +33,9 @@ void		privmsg_channel(t_client *client, char *name_receiver,
   t_channel	*channel;
 
   if (!(channel = hash_table_find_channel(&server.channels, name_receiver)))
-    return (client_write_buffer(client, ERR_401, name_receiver));
+    return (client_write_buffer(client, ERR_401, client->nick, name_receiver));
   if (!client_is_member(channel, client))
-    return (client_write_buffer(client, ERR_404, name_receiver));
+    return (client_write_buffer(client, ERR_404, client->nick, name_receiver));
   broadcast_message_channel(client, channel, message);
 }
 
@@ -46,7 +46,8 @@ void		privmsg_client(t_client *client, char *nick_receiver,
 
   if (!(client_remote =
 	hash_table_find_client(&server.clients, nick_receiver)))
-    return (client_write_buffer(client, ERR_401, nick_receiver));
+    return (client_write_buffer(client, ERR_401, client->nick,
+				nick_receiver));
   return (client_write_buffer(client_remote, RPL_PRIVMSG,
 			      client->nick, client->nick, message));
 }
@@ -58,9 +59,9 @@ int		command_privmsg(t_client *client, t_client_command command)
   if (!client->nick)
     return (client_write_buffer(client, ERR_451), 0);
   if (command.argc < 2)
-    return (client_write_buffer(client, ERR_411, "PRIVMSG"), 0);
+    return (client_write_buffer(client, ERR_411, client->nick, "PRIVMSG"), 0);
   if (command.argc < 3)
-    return (client_write_buffer(client, ERR_412), 0);
+    return (client_write_buffer(client, ERR_412, client->nick), 0);
   if (command.args[1][0] != '#')
     privmsg_client(client, command.args[1], command.args[2]);
   else
