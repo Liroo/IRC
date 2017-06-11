@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 03:07:33 2017 Pierre Monge
-** Last update Sun Jun 11 05:13:05 2017 Pierre Monge
+** Last update Sun Jun 11 08:31:40 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -14,16 +14,20 @@
 
 static t_command	*get_command_list()
 {
-  static t_command	command_list[COMMAND_LIST_SIZE] = {
+  static t_command	command_entry[COMMAND_LIST_SIZE] = {
     { "nick", &command_nick },
     { "quit", &command_quit },
     { "ping", &command_ping },
     { "user", &command_user },
     { "users", &command_users },
-    { "privmsg", &command_privmsg }
+    { "privmsg", &command_privmsg },
+    { "join", &command_join },
+    { "list", &command_list },
+    { "part", &command_part },
+    { "names", &command_names }
   };
 
-  return (command_list);
+  return (command_entry);
 }
 
 int		command_exec(t_client *client, t_client_command command)

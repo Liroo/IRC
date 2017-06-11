@@ -5,14 +5,14 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 02:52:00 2017 Pierre Monge
-** Last update Sun Jun 11 06:31:40 2017 Pierre Monge
+** Last update Sun Jun 11 09:40:33 2017 Pierre Monge
 */
 
 #ifndef COMMAND_H
 # define COMMAND_H
 
 # define MAX_COMMAND_SIZE 32
-# define COMMAND_LIST_SIZE 6
+# define COMMAND_LIST_SIZE 10
 
 /*
 ** based on RFC maximum of arguments in a message is:
@@ -58,6 +58,21 @@ int	command_exec(t_client *client, t_client_command command);
   SRV_PRE " "					  \
   "001 %s :Welcome to the Internet Relay Network" \
   "" CR_LF
+
+# define RPL_332				  \
+  SRV_PRE " "					  \
+  "332 %s :%s"					  \
+  "" CR_LF
+
+# define RPL_353				  \
+  SRV_PRE " "					  \
+  "353 %s :"
+
+# define RPL_366				  \
+  SRV_PRE " "					  \
+  "366 %s :End of /NAMES list"			  \
+  "" CR_LF
+
 # define RPL_392				\
   SRV_PRE " "					\
   "392 :UserID"					\
@@ -75,6 +90,10 @@ int	command_exec(t_client *client, t_client_command command);
 # define ERR_401				\
   SRV_PRE ""					\
   "%s :No such nick/channel"			\
+  "" CR_LF
+# define ERR_405							\
+  SRV_PRE ""								\
+  "405 %s :You have joined too many channels"				\
   "" CR_LF
 
 # define ERR_411				\
@@ -104,6 +123,11 @@ int	command_exec(t_client *client, t_client_command command);
   "451 :You have not registered"		\
   "" CR_LF
 
+# define ERR_461				\
+  SRV_PRE " "					\
+  "461 %s :Not enough parameters"		\
+  "" CR_LF
+
 /*
 ** Command list
 */
@@ -117,9 +141,18 @@ int	command_exec(t_client *client, t_client_command command);
   " " SRV_PRE					\
   " " SRV_PRE					\
   "" CR_LF
+# define RPL_NICK_B				\
+  ":%s NICK %s"					\
+  "" CR_LF
+# define RPL_JOIN				\
+  ":%s JOIN %s"					\
+  "" CR_LF
+# define RPL_PART				\
+  ":%s PART %s"					\
+  "" CR_LF
 # define RPL_PRIVMSG				\
   SRV_PRE " "					\
-  "PRIVMSG %s :%s"					\
+  "PRIVMSG %s :%s"				\
   "" CR_LF
 
 int	command_nick(t_client *client, t_client_command command);
@@ -128,5 +161,9 @@ int	command_ping(t_client *client, t_client_command command);
 int	command_user(t_client *client, t_client_command command);
 int	command_users(t_client *client, t_client_command command);
 int	command_privmsg(t_client *client, t_client_command command);
+int	command_join(t_client *client, t_client_command command);
+int	command_list(t_client *client, t_client_command command);
+int	command_part(t_client *client, t_client_command command);
+int	command_names(t_client *client, t_client_command command);
 
 #endif /* !COMMAND_H */

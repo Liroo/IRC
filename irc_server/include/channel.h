@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 07:33:17 2017 Pierre Monge
-** Last update Sun Jun 11 07:48:05 2017 Pierre Monge
+** Last update Sun Jun 11 08:42:52 2017 Pierre Monge
 */
 
 #ifndef CHANNEL_H
@@ -26,7 +26,7 @@ t_channel	*channel_create(char *name);
 **
 ** Note: DOES NOT PROPAGATE ANY MESSAGE -- Pierre
 */
-t_channel	*channel_insert_user(t_channel *channel, t_client *client);
+int	channel_insert_user(t_channel *channel, t_client *client);
 
 /*
 ** channel_delete_user - delete channel in user and user in channel
@@ -35,6 +35,6 @@ t_channel	*channel_insert_user(t_channel *channel, t_client *client);
 **
 ** Note: DOES NOT PROPAGATE ANY MESSAGE -- Pierre
 */
-t_channel	*channel_delete_user(t_channel *channel, t_client *client);
+void	channel_delete_user(t_channel *channel, t_client *client);
 
 #endif /* !CHANNEL_H */
