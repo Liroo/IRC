@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 05:00:26 2017 Pierre Monge
-** Last update Sun Jun 11 09:38:59 2017 Pierre Monge
+** Last update Sun Jun 11 11:05:03 2017 Pierre Monge
 */
 
 #include <stdlib.h>
@@ -23,8 +23,11 @@ static void	client_leave_channel(t_client *client)
   while (channel)
     {
       next = channel->next;
-      channel_delete_user(channel->channel, client);
-      broadcast_part_channel(client, channel->channel);
+      if (channel->channel)
+	{
+	  broadcast_part_channel(client, channel->channel);
+	  channel_delete_user(channel->channel, client);
+	}
       channel = next;
     }
 }

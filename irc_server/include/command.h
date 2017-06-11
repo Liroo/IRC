@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat Jun 10 02:52:00 2017 Pierre Monge
-** Last update Sun Jun 11 09:40:33 2017 Pierre Monge
+** Last update Sun Jun 11 11:06:45 2017 Pierre Monge
 */
 
 #ifndef COMMAND_H
@@ -88,20 +88,24 @@ int	command_exec(t_client *client, t_client_command command);
 
 
 # define ERR_401				\
-  SRV_PRE ""					\
-  "%s :No such nick/channel"			\
+  SRV_PRE " "					\
+  "401 %s :No such nick/channel"		\
+  "" CR_LF
+# define ERR_403				\
+  SRV_PRE " "					\
+  "403 %s :No such channel"			\
   "" CR_LF
 # define ERR_405							\
-  SRV_PRE ""								\
+  SRV_PRE " "								\
   "405 %s :You have joined too many channels"				\
   "" CR_LF
 
 # define ERR_411				\
-  SRV_PRE ""					\
+  SRV_PRE " "					\
   "411 :No recipient given (%s)"		\
   "" CR_LF
 # define ERR_412				\
-  SRV_PRE ""					\
+  SRV_PRE " "					\
   "412 :No text to send"			\
   "" CR_LF
 
@@ -111,11 +115,16 @@ int	command_exec(t_client *client, t_client_command command);
   "" CR_LF
 # define ERR_432				\
   SRV_PRE " "					\
- "432 %s :Erroneus nickname"			\
- "" CR_LF
+  "432 %s :Erroneus nickname"			\
+  "" CR_LF
 # define ERR_433				\
   SRV_PRE " "					\
   "433 %s :Nickname is already in use"		\
+  "" CR_LF
+
+# define ERR_442				\
+  SRV_PRE " "					\
+  "442 %s :You're not on that channel"		\
   "" CR_LF
 
 # define ERR_451				\

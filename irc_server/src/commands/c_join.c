@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 08:29:34 2017 Pierre Monge
-** Last update Sun Jun 11 09:41:33 2017 Pierre Monge
+** Last update Sun Jun 11 11:16:42 2017 Pierre Monge
 */
 
 #include "command.h"
@@ -28,7 +28,7 @@ static int	client_count_channel(t_client *client)
   return (i);
 }
 
-static void	join_list_user(t_client *client, t_channel *channel)
+static void	join_list_users(t_client *client, t_channel *channel)
 {
   t_member	*member;
 
@@ -53,6 +53,8 @@ int		command_join(t_client *client, t_client_command command)
     return (client_write_buffer(client, ERR_451), 0);
   if (command.argc < 2)
     return (client_write_buffer(client, ERR_461, "JOIN"), 0);
+  if (command.args[1][0] != '#')
+    return (client_write_buffer(client, ERR_403, command.args[1]), 0);
   if (client_count_channel(client) > 9)
     return (client_write_buffer(client, ERR_405, command.args[1]), 0);
   channel = hash_table_find_server(&server.channels, command.args[1]);
@@ -63,6 +65,6 @@ int		command_join(t_client *client, t_client_command command)
   channel_insert_user(channel, client);
   client_write_buffer(client, RPL_JOIN, client->nick, channel->name);
   client_write_buffer(client, RPL_332, channel->name, channel->name);
-  join_list_user(client, channel);
+  join_list_users(client, channel);
   return (0);
 }

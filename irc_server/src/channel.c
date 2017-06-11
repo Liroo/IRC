@@ -5,12 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun Jun 11 07:32:23 2017 Pierre Monge
-** Last update Sun Jun 11 08:20:31 2017 Pierre Monge
+** Last update Sun Jun 11 11:01:14 2017 Pierre Monge
 */
 
 #include <stdlib.h>
 #include <strings.h>
 #include <time.h>
+#include <string.h>
 
 #include "struct.h"
 #include "channel.h"
@@ -102,4 +103,11 @@ void		channel_delete_user(t_channel *channel, t_client *client)
 	}
     }
   channel_user_delete_channel(channel, client);
+  if (channel->clients->next == NULL)
+    {
+      list_del(channel->list.prev, channel->list.next);
+      free(channel->clients);
+      free(channel->name);
+      free(channel);
+    }
 }
