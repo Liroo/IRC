@@ -34,6 +34,8 @@ client:
 debug:
 	@make --no-print-directory -C $(SERVER) debug
 	@make --no-print-directory -C $(CLIENT) debug
+	$(CP) $(SERVER)/$(SERVER_BIN) .
+	$(CP) $(CLIENT)/$(CLIENT_BIN) .
 
 clean:
 	@make --no-print-directory -C $(SERVER) clean
