@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 27 06:30:42 2017 Pierre Monge
-## Last update Sun Jun 11 20:44:53 2017 Pierre Monge
+## Last update Mon Jun 12 16:50:11 2017 Pierre Monge
 ##
 
 PROJECT := IRC
@@ -18,22 +18,20 @@ CP = cp
 RM = rm -f
 
 all:
-	@make --no-print-directory -C $(SERVER)
-	@make --no-print-directory -C $(CLIENT)
-	$(CP) $(SERVER)/$(SERVER_BIN) .
-	$(CP) $(CLIENT)/$(CLIENT_BIN) .
+	@make --no-print-directory $(SERVER_BIN)
+	@make --no-print-directory $(CLIENT_BIN)
 
-server:
+$(SERVER_BIN):
 	@make --no-print-directory -C $(SERVER)
+	@$(CP) $(SERVER)/$(SERVER_BIN) .
 
-client:
+$(CLIENT_BIN):
 	@make --no-print-directory -C $(CLIENT)
+	@$(CP) $(CLIENT)/$(CLIENT_BIN) .
 
 debug:
-	@make --no-print-directory -C $(SERVER) debug
-	@make --no-print-directory -C $(CLIENT) debug
-	$(CP) $(SERVER)/$(SERVER_BIN) .
-	$(CP) $(CLIENT)/$(CLIENT_BIN) .
+	@make --no-print-directory -C $(SERVER_BIN) debug
+	@make --no-print-directory -C $(CLIENT_BIN) debug
 
 clean:
 	@make --no-print-directory -C $(SERVER) clean
